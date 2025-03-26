@@ -27,6 +27,14 @@ SECRET_KEY = 'django-insecure-e-mqcu31hroyi1g^^_0%0vrwjtte)#ryd*3dgs7spbujpm*8ag
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Ensure Django REST Framework returns JSON responses
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
+
+
 ALLOWED_HOSTS = [
     "resollectapp.onrender.com",  
     "localhost",
