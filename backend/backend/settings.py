@@ -66,10 +66,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # ✅ Allow React frontend
+    "https://resollect-qacozof5s-ankit-yadavs-projects-35532859.vercel.app",
 ]
 
-CORS_ALLOW_CREDENTIALS = True  # ✅ Allow cookies to be sent
+CSRF_TRUSTED_ORIGINS = [
+    "https://resollect-qacozof5s-ankit-yadavs-projects-35532859.vercel.app",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 
 
 ROOT_URLCONF = 'backend.urls'
