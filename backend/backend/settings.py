@@ -89,8 +89,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': dj_database_url.config(
+        default="postgresql://ankit3388:x9y8vSk2VxoVng7oL3nVADfR4n741ZqL@dpg-cvi7175svqrc73ckns00-a/resollect_db"
+    )
 }
+
 
 
 # Password validation
