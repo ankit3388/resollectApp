@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://127.0.0.1:8000/api/items/";
+const API_URL = "https://resollectapp.onrender.com/api/items/";
+
+// const API_URL = "http://127.0.0.1:8000/api/items/";
 
 export const fetchItems = async (search = "") => {
   const response = await axios.get(`${API_URL}?search=${search}`);
