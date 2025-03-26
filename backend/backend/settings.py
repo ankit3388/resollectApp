@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url  # Add this line
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -87,14 +89,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'item',  # Replace with your PostgreSQL database name
-        'USER': 'postgres',       # Replace with your PostgreSQL username
-        'PASSWORD': 'Kc3388@%',  # Replace with your PostgreSQL password
-        'HOST': 'localhost',    # Change if using a remote database
-        'PORT': '5432',         # Default PostgreSQL port
-    }
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
 
 
