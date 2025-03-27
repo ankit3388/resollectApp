@@ -1,183 +1,148 @@
-# **Resollect - Full Stack Inventory Management System**
+# Resollect App
 
-## **Introduction**
-Resollect is a **full-stack inventory management system** built with **Django (DRF) for the backend** and **React for the frontend**. It provides a simple and intuitive interface to manage inventory, with features such as:
+**Resollect** is a full-stack web application built using **React (Frontend) & Django (Backend)**.  
+It provides a **data table**, supports **filtering & bucketing**, and includes **CRUD operations** via REST APIs.
 
-**Item listing with filtering & grouping**  
-**CRUD operations for inventory management**  
-**Mobile-responsive UI**  
-**REST APIs for seamless integration**  
-**Database storage using PostgreSQL**  
+## 🌐 Live Deployment  
+- **Frontend (Netlify):** [Resollect Frontend](https://resollect-eight.vercel.app/)  
+- **Backend (Render):** [Resollect Backend](https://resollectapp.onrender.com/)  
 
 ---
 
-## **Tech Stack & Libraries Used**
-### **Backend**
-- **Django** & **Django Rest Framework (DRF)** – For API development
-- **PostgreSQL** – Relational database for storing items
-- **CORS Headers & Middleware** – To enable frontend-backend communication
-- **Gunicorn/Nginx** (Optional) – For deployment
-
+## 🛠️ Tech Stack
 ### **Frontend**
-- **React (Vite)** – Fast frontend framework
-- **Tailwind CSS** – For responsive UI styling
-- **Axios** – To make API requests
-- **React Router** – For page navigation
-- **Lucide-react** – Icon library for UI components
+- React.js (Vite)
+- Tailwind CSS (for UI)
+- Axios (for API calls)
+- React Router (for navigation)
+- Netlify (for deployment)
+
+### **Backend**
+- Django & Django Rest Framework (DRF)
+- PostgreSQL (Database)
+- Gunicorn (for production server)
+- Django-CORS-Headers (for CORS handling)
+- Render (for deployment)
 
 ---
 
-## ** Setup Guide**
-
-### **PostgreSQL Setup**
-#### **Step 1: Install PostgreSQL**
-For Windows, download from [PostgreSQL official site](https://www.postgresql.org/download/).
-For Ubuntu/Linux, run:
-```bash
-sudo apt update
-sudo apt install postgresql postgresql-contrib
+## Project Structure
 ```
-For Mac, use Homebrew:
-```bash
-brew install postgresql
-```
-
-#### **Step 2: Start PostgreSQL Service**
-```bash
-sudo service postgresql start  # Linux
-brew services start postgresql  # Mac
-```
-
-#### **Step 3: Create Database & User**
-```bash
-sudo -u postgres psql
-# Inside psql:
-CREATE DATABASE resollect_db;
-CREATE USER resollect_user WITH ENCRYPTED PASSWORD 'password123';
-ALTER ROLE resollect_user SET client_encoding TO 'utf8';
-ALTER ROLE resollect_user SET default_transaction_isolation TO 'read committed';
-ALTER ROLE resollect_user SET timezone TO 'UTC';
-GRANT ALL PRIVILEGES ON DATABASE resollect_db TO resollect_user;
-\q  # Exit psql
+resollect/
+️├── backend/             # Django Backend
+️│   ├── backend/         # Django Project Settings
+️│   ├── myapp/           # Main App (APIs, Models)
+️│   ├── manage.py        # Django Management Script
+️│   ├── requirements.txt # Backend Dependencies
+️├── frontend/            # React Frontend
+️│   ├── src/             # React Source Files
+️│   ├── public/          # Static Assets
+️│   ├── package.json     # Frontend Dependencies
+️├── README.md            # Documentation
 ```
 
 ---
 
-### **Backend Setup (Django + PostgreSQL)**
-#### **Step 1: Clone Repository & Create Virtual Environment**
+## 🚀 Installation & Setup
+### **Clone the Repository**
 ```bash
-git clone https://github.com/yourusername/resollect.git
-cd resollect/backend
-python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
+git clone https://github.com/your-username/resollect.git
+cd resollect
 ```
 
-#### **Step 2: Install Dependencies**
+### **Backend Setup (Django)**
 ```bash
+cd backend
+python -m venv venv         # Create a virtual environment
+source venv/bin/activate    # Activate (Mac/Linux)
+venv\Scripts\activate       # Activate (Windows)
 pip install -r requirements.txt
+python manage.py migrate    # Apply database migrations
+python manage.py runserver  # Start backend
 ```
 
-#### **Step 3: Configure `settings.py` for PostgreSQL**
-Edit `backend/myproject/settings.py`:
-```python
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'resollect_db',
-        'USER': 'resollect_user',
-        'PASSWORD': 'password123',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+#### ** Configure `.env` for Database (if needed)**
+```env
+DATABASE_URL=postgres://username:password@host:port/database_name
 ```
-
-#### **Step 4: Apply Migrations & Run Server**
-```bash
-python manage.py makemigrations
-python manage.py migrate
-python manage.py createsuperuser  # Optional
-python manage.py runserver
-```
-🚀 Backend will be available at **`http://127.0.0.1:8000/api/`**.
 
 ---
 
-### **Frontend Setup (React + Tailwind CSS)**
-#### **Step 1: Install Dependencies**
+### ** Frontend Setup (React)**
 ```bash
-cd ../frontend
-npm install
+cd frontend
+npm install          # Install dependencies
+npm run dev          # Start frontend (Runs on localhost:5173)
 ```
-
-#### **Step 2: Start the React App**
-```bash
-npm run dev
-```
-🚀 Open **`http://localhost:5173/`** to see the frontend UI.
 
 ---
 
-## **API Documentation (Postman Testing Guide)**
-
-### **Base URL:**
-```
-http://127.0.0.1:8000/api/
-```
-
-### **CRUD Endpoints**
+## 💚 API Endpoints
 | Method | Endpoint | Description |
 |--------|---------|-------------|
-| `GET` | `/items/` | List all items (supports search) |
-| `POST` | `/items/` | Create a new item |
-| `GET` | `/items/<id>/` | Retrieve a single item |
-| `PUT` | `/items/<id>/` | Update an item |
-| `DELETE` | `/items/<id>/` | Delete an item |
-| `GET` | `/items/bucket_by_category/` | Group items by category |
-
-### **Testing with Postman**
-- **List all items:** `GET http://127.0.0.1:8000/api/items/`
-- **Create item:** Send JSON data in a `POST` request.
-- **Update item:** Send JSON data in a `PUT` request.
-- **Delete item:** `DELETE http://127.0.0.1:8000/api/items/1/`
+| **GET** | `/api/items/` | List all items (with filtering) |
+| **POST** | `/api/items/` | Create a new item |
+| **GET** | `/api/items/<id>/` | Retrieve a single item |
+| **PUT** | `/api/items/<id>/` | Update an item |
+| **DELETE** | `/api/items/<id>/` | Delete an item |
+| **GET** | `/api/items/bucket_by_category/` | Group items by category |
 
 ---
 
-## **Deployment Guide**
-### **Backend (Django) Deployment**
-```bash
-pip install gunicorn
-
-# Run Gunicorn
-gunicorn --bind 0.0.0.0:8000 backend.wsgi
-```
-
-### **Frontend (React) Deployment**
-```bash
-npm run build
-```
-Deploy the `dist/` folder on **Netlify**, **Vercel**, or any hosting provider.
+##  Features
+👉 **Landing Page** – Displays items in a **mobile-responsive table**  
+👉 **Filtering** – Search items by name/category  
+👉 **Data Bucketing** – Group items by category  
+👉 **CRUD Operations** – Add, update, and delete items  
+👉 **Fully Deployed** – Hosted on **Netlify & Render**  
 
 ---
 
-## ** Contributing**
-Pull requests are welcome! Steps to contribute:
-1. Fork the repo
-2. Create a new branch (`git checkout -b feature-branch`)
-3. Commit changes (`git commit -m 'Add new feature'`)
-4. Push to branch (`git push origin feature-branch`)
-5. Open a Pull Request
+##  Deployment Guide
+### **Frontend (Netlify)**
+1. Push code to GitHub
+2. Go to [Netlify](https://app.netlify.com/) → **New Site from Git**
+3. Connect GitHub repo, set **Build Command:** `npm run build`, **Output Dir:** `dist`
+4. Deploy and get your **live URL**
+
+### **Backend (Render)**
+1. Go to [Render](https://dashboard.render.com/) → **New Web Service**
+2. Connect GitHub repo and set **Environment Variables**
+3. **Start Command:** `gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT`
+4. Deploy and get your **live API URL**
 
 ---
 
-## ** License**
+##  Troubleshooting
+- **CORS Issues?**  
+  Ensure your `settings.py` includes:  
+  ```python
+  CORS_ALLOWED_ORIGINS = [
+      "https://resollect-eight.vercel.app",
+  ]
+  ```
+- **Database Errors?**  
+  Run migrations again:  
+  ```bash
+  python manage.py migrate
+  ```
+- **Frontend Not Updating?**  
+  Clear cache and redeploy:  
+  ```bash
+  rm -rf node_modules package-lock.json
+  npm install
+  netlify deploy --prod
+  ```
+
+---
+
+## 👨‍💻 Author
+**Ankit Yadav**  
+🔗 **LinkedIn:** [Ankit Kumar](https://linkedin.com/in/ankit-kumar-b7730422a/) 
+ **GitHub:** [ankit3388](https://github.com/ankit3388)  
+
+---
+
+## 📜 License
 This project is licensed under the **MIT License**.
-
----
-
-## ** Author**
-👤 **Ankit**  
-📧 Contact: `ankityd0703@gmail.com`  
-GitHub: [yourgithubusername](https://github.com/ankit3388)
-
 
