@@ -66,11 +66,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 CORS_ALLOWED_ORIGINS = [
-    "https://resollect-eight.vercel.app/",
+    "https://resollect-eight.vercel.app",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://resollect-eight.vercel.app/",
+    "https://resollect-eight.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
